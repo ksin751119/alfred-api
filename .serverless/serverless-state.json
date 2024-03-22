@@ -7,8 +7,8 @@
     "provider": {
       "name": "aws",
       "runtime": "nodejs18.x",
-      "stage": "alpha",
-      "apiName": "position-automation-poc-backend-alpha",
+      "stage": "beta",
+      "apiName": "position-automation-poc-backend-beta",
       "apiGateway": {
         "minimumCompressionSize": 1024,
         "shouldStartNameWithService": true,
@@ -23,7 +23,7 @@
         "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
         "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
       },
-      "region": "us-east-1",
+      "region": "ap-northeast-1",
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
         "AWSTemplateFormatVersion": "2010-09-09",
@@ -101,7 +101,7 @@
           "ApiLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/position-automation-poc-backend-api-alpha"
+              "LogGroupName": "/aws/lambda/position-automation-poc-backend-api-beta"
             }
           },
           "IamRoleLambdaExecution": {
@@ -130,7 +130,7 @@
                       "-",
                       [
                         "position-automation-poc-backend",
-                        "alpha",
+                        "beta",
                         "lambda"
                       ]
                     ]
@@ -147,7 +147,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/position-automation-poc-backend-api-alpha:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/position-automation-poc-backend-api-beta:*"
                           }
                         ]
                       },
@@ -158,7 +158,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/position-automation-poc-backend-api-alpha:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/position-automation-poc-backend-api-beta:*:*"
                           }
                         ]
                       }
@@ -172,7 +172,7 @@
                   "-",
                   [
                     "position-automation-poc-backend",
-                    "alpha",
+                    "beta",
                     {
                       "Ref": "AWS::Region"
                     },
@@ -189,17 +189,18 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/position-automation-poc-backend/alpha/1704983065890-2024-01-11T14:24:25.890Z/api.zip"
+                "S3Key": "serverless/position-automation-poc-backend/beta/1711097385712-2024-03-22T08:49:45.712Z/api.zip"
               },
               "Handler": "src/index.handler",
               "Runtime": "nodejs18.x",
-              "FunctionName": "position-automation-poc-backend-api-alpha",
+              "FunctionName": "position-automation-poc-backend-api-beta",
               "MemorySize": 256,
               "Timeout": 30,
               "Environment": {
                 "Variables": {
                   "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-                  "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+                  "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000",
+                  "DATABASE_URL": "postgresql://postgres:12345678@database-1.cxcqsiwm649u.ap-northeast-1.rds.amazonaws.com:5432/postgres?schema=public"
                 }
               },
               "Role": {
@@ -213,20 +214,20 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionr8Jl4rmiDIOTaATh8MAnJPN30S4okyduw6BiX4qLOQ": {
+          "ApiLambdaVersionngIUuC3apCjBAWO2VGIGNMF13RR1otv1oXagzPY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "rqa4mVGdDkkoBFI3H8xoZPksl13mQGieCSPyhYMHJgs="
+              "CodeSha256": "SvT6f9r9RYwtuwU7oLM3/RNQJSnBQbr30vZrndxYILA="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "position-automation-poc-backend-alpha",
+              "Name": "position-automation-poc-backend-beta",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -297,13 +298,13 @@
               "ApiLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1704983064812": {
+          "ApiGatewayDeployment1711097380865": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               },
-              "StageName": "alpha"
+              "StageName": "beta"
             },
             "DependsOn": [
               "ApiGatewayMethodProxyVarAny"
@@ -311,18 +312,18 @@
           },
           "ApiGatewayUsagePlan": {
             "Type": "AWS::ApiGateway::UsagePlan",
-            "DependsOn": "ApiGatewayDeployment1704983064812",
+            "DependsOn": "ApiGatewayDeployment1711097380865",
             "Properties": {
               "ApiStages": [
                 {
                   "ApiId": {
                     "Ref": "ApiGatewayRestApi"
                   },
-                  "Stage": "alpha"
+                  "Stage": "beta"
                 }
               ],
-              "Description": "Usage plan for position-automation-poc-backend alpha stage",
-              "UsagePlanName": "position-automation-poc-backend-alpha",
+              "Description": "Usage plan for position-automation-poc-backend beta stage",
+              "UsagePlanName": "position-automation-poc-backend-beta",
               "Throttle": {
                 "BurstLimit": 30,
                 "RateLimit": 60
@@ -373,16 +374,16 @@
               "Ref": "ServerlessDeploymentBucket"
             },
             "Export": {
-              "Name": "sls-position-automation-poc-backend-alpha-ServerlessDeploymentBucketName"
+              "Name": "sls-position-automation-poc-backend-beta-ServerlessDeploymentBucketName"
             }
           },
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionr8Jl4rmiDIOTaATh8MAnJPN30S4okyduw6BiX4qLOQ"
+              "Ref": "ApiLambdaVersionngIUuC3apCjBAWO2VGIGNMF13RR1otv1oXagzPY"
             },
             "Export": {
-              "Name": "sls-position-automation-poc-backend-alpha-ApiLambdaFunctionQualifiedArn"
+              "Name": "sls-position-automation-poc-backend-beta-ApiLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -403,12 +404,12 @@
                   {
                     "Ref": "AWS::URLSuffix"
                   },
-                  "/alpha"
+                  "/beta"
                 ]
               ]
             },
             "Export": {
-              "Name": "sls-position-automation-poc-backend-alpha-ServiceEndpoint"
+              "Name": "sls-position-automation-poc-backend-beta-ServiceEndpoint"
             }
           }
         }
@@ -525,7 +526,7 @@
     "pluginsData": {},
     "functions": {
       "api": {
-        "name": "position-automation-poc-backend-api-alpha",
+        "name": "position-automation-poc-backend-api-beta",
         "handler": "src/index.handler",
         "timeout": 30,
         "memorySize": 256,
@@ -538,14 +539,16 @@
             }
           }
         ],
-        "environment": {},
+        "environment": {
+          "DATABASE_URL": "postgresql://postgres:12345678@database-1.cxcqsiwm649u.ap-northeast-1.rds.amazonaws.com:5432/postgres?schema=public"
+        },
         "package": {
           "artifact": ".serverless/api.zip"
         },
         "memory": 256,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionr8Jl4rmiDIOTaATh8MAnJPN30S4okyduw6BiX4qLOQ"
+        "versionLogicalId": "ApiLambdaVersionngIUuC3apCjBAWO2VGIGNMF13RR1otv1oXagzPY"
       }
     },
     "configValidationMode": "warn",
@@ -562,7 +565,14 @@
       },
       "package": {
         "individually": true,
-        "artifactsS3KeyDirname": "serverless/position-automation-poc-backend/alpha/code-artifacts"
+        "patterns": [
+          "!node_modules/.prisma/client/libquery_engine-*",
+          "!node_modules/@prisma/engines/**",
+          "node_modules/.prisma/client/schema.prisma",
+          "node_modules/.prisma/client/libquery_engine-rhel-*",
+          "node_modules/.prisma/client/libquery_engine-linux-arm64-*"
+        ],
+        "artifactsS3KeyDirname": "serverless/position-automation-poc-backend/beta/code-artifacts"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -576,7 +586,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/position-automation-poc-backend/alpha/1704983065890-2024-01-11T14:24:25.890Z",
+    "artifactDirectoryName": "serverless/position-automation-poc-backend/beta/1711097385712-2024-03-22T08:49:45.712Z",
     "artifact": ""
   }
 }

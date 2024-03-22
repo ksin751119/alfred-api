@@ -10,6 +10,7 @@ import httpRouterHandler from "@middy/http-router";
 import middy from "@middy/core";
 import { safeAutomation } from "./safe";
 import warmup from "@middy/warmup";
+import { taskAutomation } from "./task";
 
 const routes: Route[] = [
   {
@@ -19,14 +20,14 @@ const routes: Route[] = [
   },
   {
     method: "POST",
-    path: "/eoa/{account}",
-    handler: eoaAutomation,
+    path: "/task/{account}",
+    handler: taskAutomation,
   },
-  {
-    method: "POST",
-    path: "/safe/{account}",
-    handler: safeAutomation,
-  },
+  // {
+  //   method: "POST",
+  //   path: "/safe/{account}",
+  //   handler: safeAutomation,
+  // },
 ];
 
 export const handler = middy()
