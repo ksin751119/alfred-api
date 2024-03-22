@@ -1,0 +1,58 @@
+{
+  "name": "web3function-poc",
+  "version": "1.0.0",
+  "description": "poc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx tsc && node ./dist/position-poc.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@middy/core": "^4.5.5",
+    "@middy/http-error-handler": "^4.5.5",
+    "@middy/http-header-normalizer": "^4.5.5",
+    "@middy/http-json-body-parser": "^4.6.0",
+    "@middy/http-response-serializer": "^4.5.5",
+    "@middy/http-router": "^4.5.5",
+    "@middy/input-output-logger": "^4.6.0",
+    "@middy/warmup": "^4.5.5",
+    "@protocolink/api": "^1.0.7",
+    "@protocolink/lending": "^1.0.5",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.10.7",
+    "@typescript-eslint/eslint-plugin": "^6.18.0",
+    "@typescript-eslint/parser": "^6.18.0",
+    "@weizard/protocolink-lending": "^1.0.5",
+    "bignumber": "^1.1.0",
+    "eslint": "^8.56.0",
+    "ethers": "^5.7.0",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.2",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@serverless/typescript": "^3.30.1",
+    "@types/aws-lambda": "^8.10.119",
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.4.8",
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "catch-uncommitted": "^2.0.0",
+    "chai": "^4.3.7",
+    "esbuild": "^0.14.54",
+    "eslint": "^8.0.1",
+    "hardhat": "^2.15.0",
+    "mocha": "^10.2.0",
+    "serverless": "^3.34.0",
+    "serverless-esbuild": "~1.45.1",
+    "serverless-offline": "^12.0.4",
+    "serverless-plugin-warmup": "^8.2.1"
+  }
+}
