@@ -20,7 +20,16 @@ const serverlessConfiguration: AWS = {
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
     },
   },
-  package: { individually: true },
+  package: {
+    individually: true,
+    patterns: [
+      '!node_modules/.prisma/client/libquery_engine-*',
+      '!node_modules/@prisma/engines/**',
+      'node_modules/.prisma/client/schema.prisma',
+      'node_modules/.prisma/client/libquery_engine-rhel-*',
+      'node_modules/.prisma/client/libquery_engine-linux-arm64-*',
+    ]
+  },
   custom: {
     esbuild: {
       bundle: true,
@@ -47,7 +56,9 @@ const serverlessConfiguration: AWS = {
       timeout: 30,
       memorySize: 256,
       events: [{ http: { path: "/{proxy+}", method: "any" } }],
-      environment: {},
+      environment: {
+        DATABASE_URL: '${env:DATABASE_URL}',
+      },
     },
   },
 };

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx tsc && node ./dist/position-poc.js"
+    "start": "npx tsc && node ./dist/position-poc.js",
+    "deploy:beta": "dotenv -f .env  | yarn prisma db pull && yarn prisma generate && yarn sls deploy --aws-profile ksin751119 -r ap-northeast-1 -s beta"
   },
   "engines": {
     "node": ">=18"
@@ -19,18 +20,20 @@
     "@middy/http-router": "^4.5.5",
     "@middy/input-output-logger": "^4.6.0",
     "@middy/warmup": "^4.5.5",
+    "@prisma/client": "5.11.0",
     "@protocolink/api": "^1.0.7",
     "@protocolink/lending": "^1.0.5",
     "@types/mocha": "^10.0.6",
     "@types/node": "^20.10.7",
     "@typescript-eslint/eslint-plugin": "^6.18.0",
     "@typescript-eslint/parser": "^6.18.0",
-    "@weizard/protocolink-lending": "^1.0.5",
+    "@weizard/protocolink-lending": "^1.0.5-rc3",
     "bignumber": "^1.1.0",
     "eslint": "^8.56.0",
     "ethers": "^5.7.0",
     "mocha": "^10.2.0",
     "nodemon": "^3.0.2",
+    "prisma": "^5.11.0",
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
