@@ -55,7 +55,7 @@ const serverlessConfiguration: AWS = {
       handler: 'src/index.handler',
       timeout: 30,
       memorySize: 256,
-      events: [{ http: { path: '/{proxy+}', method: 'any' } }],
+      events: [{ http: { path: '/{proxy+}', method: 'any', cors: { origin: '*', allowCredentials: false } } }],
       environment: {
         DATABASE_URL: '${env:DATABASE_URL}',
       },
@@ -88,7 +88,7 @@ const serverlessConfiguration: AWS = {
         {
           schedule: {
             name: 'alfred-task-monitor-op',
-            rate: ['cron(0/1 * * * ? *)'], // every 15 mins, for testing set to 1 mins for temp
+            rate: ['cron(0/15 * * * ? *)'], // every 15 mins, for testing set to 1 mins for temp
           },
         },
       ],

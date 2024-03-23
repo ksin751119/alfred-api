@@ -1270,6 +1270,13 @@
   resolved "https://registry.yarnpkg.com/@middy/core/-/core-4.7.0.tgz#37e055559d5bf05dcb7b288c44644e8ae4255900"
   integrity sha512-yI++DmhDQ8+ugvY7+GrEnb2PF0M/6Wzbgu4Tf7QhOlhwKGDd4j6or+Ab7qYPWx+jnKf8F0tqlmh0gV4JLi0yHw==
 
+"@middy/http-cors@^5.3.2":
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/@middy/http-cors/-/http-cors-5.3.2.tgz#b9c2122329c79fa10bb750a7fae6a4b53e691dda"
+  integrity sha512-nayDniMRaBDPKrEnYs3JPiYCv8UYJCHSSfyD8y7dUzm4PjvCrk13+sdFKKP7rv+ie6pXa+iHJN9js16t2bnW/w==
+  dependencies:
+    "@middy/util" "5.3.2"
+
 "@middy/http-error-handler@^4.5.5":
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/@middy/http-error-handler/-/http-error-handler-4.7.0.tgz#d2b7da0177edd8a1e21b468a8e8f268bfdf5b8da"
@@ -1315,6 +1322,11 @@
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/@middy/util/-/util-4.7.0.tgz#c278766799db52880c1efebe2efc053d9d36c5ef"
   integrity sha512-HUh0EOLGzBQjmJks4N12mmEebshtCUwyzdhk59UmAj97zzM0qn0exQvZDfbkY0pb/6b7sNnf7IpFww8Z6YxpWw==
+
+"@middy/util@5.3.2":
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/@middy/util/-/util-5.3.2.tgz#eb9ecbc4c9fa31a0b093c874a37f7bde8dce286b"
+  integrity sha512-/Y5xxPwkQAigphYmJhThN6TGQCCFgybOYYK7SfiEr8cY7IhYnTys2uyTJR7ziS5jP82zNlgE9H5ZEj6IswHOKQ==
 
 "@middy/warmup@^4.5.5":
   version "4.7.0"

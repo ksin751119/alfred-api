@@ -1,26 +1,27 @@
-import "dotenv/config";
+import 'dotenv/config';
 
-import { Route } from "./types";
-import { eoaAutomation } from "./eoa";
-import { errorHandler, logger, responseSerializer } from "./middlewares";
-import { getHealthRate } from "./info";
-import httpHeaderNormalizer from "@middy/http-header-normalizer";
-import httpJsonBodyParser from "@middy/http-json-body-parser";
-import httpRouterHandler from "@middy/http-router";
-import middy from "@middy/core";
-import { safeAutomation } from "./safe";
-import warmup from "@middy/warmup";
-import { taskAutomation } from "./task";
+import { Route } from './types';
+import cors from '@middy/http-cors';
+import { eoaAutomation } from './eoa';
+import { errorHandler, logger, responseSerializer } from './middlewares';
+import { getHealthRate } from './info';
+import httpHeaderNormalizer from '@middy/http-header-normalizer';
+import httpJsonBodyParser from '@middy/http-json-body-parser';
+import httpRouterHandler from '@middy/http-router';
+import middy from '@middy/core';
+import { safeAutomation } from './safe';
+import { taskAutomation } from './task';
+import warmup from '@middy/warmup';
 
 const routes: Route[] = [
   {
-    method: "GET",
-    path: "/healthRate",
+    method: 'GET',
+    path: '/healthRate',
     handler: getHealthRate,
   },
   {
-    method: "POST",
-    path: "/task/{account}",
+    method: 'POST',
+    path: '/task/{account}',
     handler: taskAutomation,
   },
   // {
@@ -37,4 +38,5 @@ export const handler = middy()
   .use(logger)
   .use(errorHandler)
   .use(responseSerializer)
+  .use(cors())
   .handler(httpRouterHandler(routes));

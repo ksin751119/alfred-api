@@ -73,6 +73,9 @@ export const taskAutomation: Handler<RequestParms> = async (event, context) => {
 
   return {
     statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*', // Required for CORS
+    },
     body: {},
   };
 };
