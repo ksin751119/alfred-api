@@ -1,12 +1,12 @@
-import { DELEGATEDD, KEY, RPC_PROVIDER, isError } from './utils';
 import DelegateeABI from './delegatee.json';
 import { Interface } from 'ethers/lib/utils';
+import { KEY, OP_DELEGATEDD, OP_RPC_PROVIDER, RPC_PROVIDER, isError } from './utils';
 import { PrismaClient } from '@prisma/client';
 import ProtocolinkABI from './protocolink.json';
 import * as apisdk from '@protocolink/api';
 import * as common from '@protocolink/common';
 import { ethers } from 'ethers';
-import { getTokenByAddress } from './tokens';
+import { getOpTokenByAddress } from './tokens';
 import * as lending from '@weizard/protocolink-lending';
 
 const prismaClient = new PrismaClient();
@@ -20,12 +20,13 @@ type DataType = {
 
 lending.Adapter.registerProtocol(lending.protocols.aavev3.LendingProtocol);
 lending.Adapter.registerSwapper(lending.swappers.paraswapv5.LendingSwapper);
+lending.Adapter.registerSwapper(lending.swappers.openoceanv2.LendingSwapper);
 
 export const handler = async () => {
   console.log('monitor up');
   const protocolId = 'aave-v3';
-  const marketId = 'polygon';
-  const provider = new ethers.providers.JsonRpcProvider(RPC_PROVIDER);
+  const marketId = 'optimism';
+  const provider = new ethers.providers.JsonRpcProvider(OP_RPC_PROVIDER);
   const signer = new ethers.Wallet(KEY, provider);
 
   const tasks = await getTasks();
@@ -64,8 +65,8 @@ export const handler = async () => {
     try {
       console.log('task.collateral_token', task.collateral_token);
       console.log('task.borrow_token', task.borrow_token);
-      leverageToken = getTokenByAddress(task.collateral_token);
-      deleverageToken = getTokenByAddress(task.borrow_token);
+      leverageToken = getOpTokenByAddress(task.collateral_token);
+      deleverageToken = getOpTokenByAddress(task.borrow_token);
     } catch (error) {
       console.log(error);
       return { statusCode: 400, body: error };
@@ -148,10 +149,10 @@ export const handler = async () => {
     const maxFeePerGas = gasPrice.mul(2);
 
     const tx = await signer.sendTransaction({
-      to: DELEGATEDD,
+      to: OP_DELEGATEDD,
       data: postTxdata,
       value: transactionRequest.value,
-      gasLimit: 1800000,
+      gasLimit: 2500000,
       maxPriorityFeePerGas,
       maxFeePerGas,
     });
@@ -267,5 +268,5 @@ export const handler = async () => {
 };
 
 async function getTasks() {
-  return await prismaClient.tasks.findMany({ where: { chain_id: common.ChainId.polygon } });
+  return await prismaClient.tasks.findMany({ where: { chain_id: common.ChainId.optimism } });
 }
