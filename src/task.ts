@@ -37,8 +37,23 @@ export const taskAutomation: Handler<RequestParms> = async (event, context) => {
   console.log('deadline', deadline);
 
   try {
-    const task = await prisma.tasks.create({
-      data: {
+    const task = await prisma.tasks.upsert({
+      where: {
+        sender_collateral_token_borrow_token_chain_id: {
+          sender: account,
+          collateral_token: collateralTokenAddress,
+          borrow_token: borrowTokenAddress,
+          chain_id: chainId,
+        },
+      },
+      update: {
+        target_ratio: targetRatio,
+        floor_ratio: floorRatio,
+        ceiling_ratio: ceilingRatio,
+        signature: signature,
+        deadline: deadline,
+      },
+      create: {
         sender: account,
         target_ratio: targetRatio,
         floor_ratio: floorRatio,
@@ -52,6 +67,7 @@ export const taskAutomation: Handler<RequestParms> = async (event, context) => {
     });
     console.log(task);
   } catch (error) {
+    console.log('[Error]', error?.toString() ?? error);
     return { statusCode: 500, body: error };
   }
 
