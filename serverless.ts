@@ -60,24 +60,44 @@ const serverlessConfiguration: AWS = {
         DATABASE_URL: '${env:DATABASE_URL}',
       },
     },
-    // txMonitor: {
-    //   name: '${self:service}-${self:provider.stage}',
-    //   handler: 'src/task_monitor.handler',
-    //   timeout: 300,
-    //   memorySize: 256,
-    //   events: [
-    //     {
-    //       schedule: {
-    //         name: 'alfred-task-monitor',
-    //         rate: ['cron(0/15 * * * ? *)'], // every 15 mins
-    //       },
-    //     },
-    //   ],
-    //   environment: {
-    //     DATABASE_URL: '${env:DATABASE_URL}',
-    //     EXECUTOR_PRIVATE_KEY: '${env:EXECUTOR_PRIVATE_KEY}',
-    //   },
-    // },
+    txMonitor: {
+      name: '${self:service}-${self:provider.stage}',
+      handler: 'src/task_monitor.handler',
+      timeout: 300,
+      memorySize: 256,
+      events: [
+        {
+          schedule: {
+            name: 'alfred-task-monitor',
+            rate: ['cron(0/15 * * * ? *)'], // every 15 mins, for testing set to 1 mins for temp
+          },
+        },
+      ],
+      environment: {
+        DATABASE_URL: '${env:DATABASE_URL}',
+        EXECUTOR_PRIVATE_KEY: '${env:EXECUTOR_PRIVATE_KEY}',
+        ALCHEMY_KEY: '${env:ALCHEMY_KEY}',
+      },
+    },
+    txMonitorOp: {
+      name: '${self:service}-op-${self:provider.stage}',
+      handler: 'src/task_monitor_op.handler',
+      timeout: 300,
+      memorySize: 256,
+      events: [
+        {
+          schedule: {
+            name: 'alfred-task-monitor-op',
+            rate: ['cron(0/1 * * * ? *)'], // every 15 mins, for testing set to 1 mins for temp
+          },
+        },
+      ],
+      environment: {
+        DATABASE_URL: '${env:DATABASE_URL}',
+        EXECUTOR_PRIVATE_KEY: '${env:EXECUTOR_PRIVATE_KEY}',
+        ALCHEMY_KEY: '${env:ALCHEMY_KEY}',
+      },
+    },
   },
 };
 

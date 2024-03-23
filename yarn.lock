@@ -2687,7 +2687,7 @@
     "@uniswap/v3-core" "1.0.0"
     "@uniswap/v3-periphery" "^1.0.1"
 
-"@weizard/protocolink-lending@^1.0.5-rc3":
+"@weizard/protocolink-lending@^1.0.14":
   version "1.0.14"
   resolved "https://registry.yarnpkg.com/@weizard/protocolink-lending/-/protocolink-lending-1.0.14.tgz#1f8596b81139e5591f8c194617d38b1f90fcaa84"
   integrity sha512-ISzdPnnxhQ6AeKGp+gSDxK9ulLcxxQNoKjl5jXJNfAmcVXLfhLjdFfOyK0oAMuiQRm5NvO2StWztzfVjBTuXSg==

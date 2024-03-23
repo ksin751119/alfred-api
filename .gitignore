@@ -4,3 +4,6 @@ node_modules
 .DS_STORE
 
 .esbuild
+
+.env
+.env.*
