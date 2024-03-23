@@ -1,0 +1,25 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-1.0.x", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model tasks {
+  sender           String   @db.VarChar(255)
+  target_ratio     Int
+  floor_ratio      Int
+  ceiling_ratio    Int
+  collateral_token String   @db.VarChar(255)
+  borrow_token     String   @db.VarChar(255)
+  signature        String   @db.VarChar(255)
+  chain_id         Int
+  created_at       DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamp(6)
+  updated_at       DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @updatedAt @db.Timestamp(6)
+  deadline         Int
+
+  @@id([sender, collateral_token, borrow_token, chain_id], map: "address_nonce_pkey")
+}
