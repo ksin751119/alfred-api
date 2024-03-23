@@ -162,7 +162,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/position-automation-poc-backend/beta/1711097385712-2024-03-22T08:49:45.712Z/api.zip"
+          "S3Key": "serverless/position-automation-poc-backend/beta/1711128325763-2024-03-22T17:25:25.763Z/api.zip"
         },
         "Handler": "src/index.handler",
         "Runtime": "nodejs18.x",
@@ -187,14 +187,14 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersionngIUuC3apCjBAWO2VGIGNMF13RR1otv1oXagzPY": {
+    "ApiLambdaVersionUhvpfbwSnowKDohbVDsPFsuMfMvAvwqZaxRj9Lj29s": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "SvT6f9r9RYwtuwU7oLM3/RNQJSnBQbr30vZrndxYILA="
+        "CodeSha256": "D+iwRDm6ougOakDP22uAuFQk8GcndKzCz/ndw7Lero8="
       }
     },
     "ApiGatewayRestApi": {
@@ -271,7 +271,7 @@
         "ApiLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1711097380865": {
+    "ApiGatewayDeployment1711128319144": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -285,7 +285,7 @@
     },
     "ApiGatewayUsagePlan": {
       "Type": "AWS::ApiGateway::UsagePlan",
-      "DependsOn": "ApiGatewayDeployment1711097380865",
+      "DependsOn": "ApiGatewayDeployment1711128319144",
       "Properties": {
         "ApiStages": [
           {
@@ -353,7 +353,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionngIUuC3apCjBAWO2VGIGNMF13RR1otv1oXagzPY"
+        "Ref": "ApiLambdaVersionUhvpfbwSnowKDohbVDsPFsuMfMvAvwqZaxRj9Lj29s"
       },
       "Export": {
         "Name": "sls-position-automation-poc-backend-beta-ApiLambdaFunctionQualifiedArn"
